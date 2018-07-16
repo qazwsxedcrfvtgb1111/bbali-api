@@ -11,7 +11,8 @@ services:
     links:
       - db
     volumes:
-      - $PWD:/usr/src
+      - .:/usr/src
+      - /usr/src/node_modules
     depends_on:
       - db
     ports:
