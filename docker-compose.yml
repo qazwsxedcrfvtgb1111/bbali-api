@@ -3,6 +3,8 @@ services:
   db:
     image: mongo:4.0.0
     restart: on-failure
+    volumes:
+        - mongo_data:/data/db
     ports:
         - "27017:27017"
   app:
@@ -12,7 +14,7 @@ services:
       - db
     volumes:
       - .:/usr/src
-      - /usr/src/node_modules
+      - node_modules:/usr/src/node_modules
     depends_on:
       - db
     ports:
@@ -23,3 +25,6 @@ services:
       - NODE_ENV=development
       - MONGO_CONNECTION_STRING=mongodb://db/bbali
       - DEBUG=*
+volumes:
+  node_modules:
+  mongo_data:
